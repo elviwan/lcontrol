@@ -6,15 +6,11 @@ import logging
 import sys, os
 from queue import Queue
 from threading import Thread
-# Add lib directory to module search path
-parent_dir = os.path.abspath(os.path.dirname(__file__))
-lib_dir = os.path.join(parent_dir, 'lib')
 
-# We insert our own libraries with our own modifications first
-# This way, the interpreter uses our libraries instead of the
-# ones that may exist on our machine
-sys.path.insert(0,lib_dir)
 import pyautogui
+from patches.monkeyPatches import mouseMoveDragPatch
+
+pyautogui._mouseMoveDrag = mouseMoveDragPatch
 
 loggingLevel = logging.INFO
 if getattr(sys, 'frozen', False):
