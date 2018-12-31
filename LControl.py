@@ -49,6 +49,7 @@ class LControl():
     def moveDrag( self, x, y, move="move", duration=0.5 ):
         # Line 821/822 are commented out in __init__.py for pyAutoGui
         # This allows us to move between monitors
+        duration = 0
         try:
             x = int( x )
             y = int( y )
@@ -58,10 +59,10 @@ class LControl():
 
         if move == "move":
             logging.debug( "Moving to coordinates: " + str( x ) + " " + str( y ) )
-            pyautogui.moveRel( x, y, 0.5 )
+            pyautogui.moveRel( x, y, duration )
         elif move == "drag":
             logging.debug( "Dragging to coordinates: " + str( x ) + " " + str( y ) )
-            pyautogui.dragRel( x, y, 0.5 )
+            pyautogui.dragRel( x, y, duration )
         else:
             logging.error( str( __name__ ) + " Received: " + str( move ) )
             return False
